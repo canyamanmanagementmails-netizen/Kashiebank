@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbor Bank — Accounts that stay out of your way</title>
+<meta name="description" content="Checking, savings and business accounts with clear fees and simple online banking.">
+<style>
+:root{--ink:#14262b;--sea:#0f5c63;--sea-dark:#0b4449;--sand:#f3efe6;--paper:#fffdf8;--line:#d9d3c5;--gold:#c9962b;--muted:#566468}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--paper)}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .5em;font-weight:700}
+h1{font-size:clamp(2.2rem,6vw,3.8rem);letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,4vw,2.3rem)}
+h3{font-size:1.25rem}
+p{margin:0 0 1em;max-width:62ch}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+header{border-bottom:1px solid var(--line);background:var(--paper)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{font:700 1.35rem Georgia,serif;text-decoration:none;color:var(--sea)}
+nav{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+nav a{padding:8px 12px;text-decoration:none;border-radius:6px;font-size:.95rem}
+nav a:hover{background:var(--sand)}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;background:var(--sea);color:#fff;text-decoration:none;font-weight:600;border:0;cursor:pointer;font-size:1rem}
+.btn:hover{background:var(--sea-dark)}
+.btn.alt{background:transparent;color:var(--sea);border:2px solid var(--sea)}
+.btn.alt:hover{background:var(--sand)}
+.hero{background:var(--sand);padding:64px 0}
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.hero p.lead{font-size:1.15rem;color:var(--muted)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.calc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:28px}
+.calc h2{font-size:1.3rem}
+.calc label{display:block;font-weight:600;margin:16px 0 4px;font-size:.95rem}
+.calc input[type=range]{width:100%;accent-color:var(--sea)}
+.calc .val{float:right;font-weight:400;color:var(--muted)}
+.result{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.result strong{display:block;font:700 2.2rem Georgia,serif;color:var(--sea)}
+.result small{color:var(--muted)}
+section.block{padding:64px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:32px}
+.grid div{border-top:3px solid var(--sea);padding-top:16px}
+.security{background:var(--sea-dark);color:#f3efe6}
+.security ul{margin:24px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px}
+.security li{padding-left:22px;position:relative}
+.security li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;background:var(--gold);border-radius:50%}
+.cta{text-align:center}
+.cta p{margin-left:auto;margin-right:auto}
+footer{border-top:1px solid var(--line);padding:32px 0;font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media(max-width:800px){.hero .wrap,.grid,.security ul{grid-template-columns:1fr}.hero{padding:40px 0}header .wrap{height:auto;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">Harbor Bank</a>
+    <nav aria-label="Main">
+      <a href="#accounts">Accounts</a>
+      <a href="#security">Security</a>
+      <a href="#open">Open an account</a>
+      <a class="btn" href="#">Sign in</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Banking with the fees printed on page one.</h1>
+        <p class="lead">Checking, savings and business accounts with no monthly minimums and one clear price list. Open yours in about five minutes.</p>
+        <div class="actions">
+          <a class="btn" href="#open">Open an account</a>
+          <a class="btn alt" href="#accounts">Compare accounts</a>
+        </div>
+      </div>
+      <div class="calc">
+        <h2>See what your savings could earn</h2>
+        <label for="amt">Starting deposit <span class="val" id="amtv"></span></label>
+        <input id="amt" type="range" min="500" max="100000" step="500" value="10000">
+        <label for="mo">Monthly deposit <span class="val" id="mov"></span></label>
+        <input id="mo" type="range" min="0" max="2000" step="25" value="200">
+        <label for="yr">Years <span class="val" id="yrv"></span></label>
+        <input id="yr" type="range" min="1" max="30" step="1" value="5">
+        <div class="result" aria-live="polite">
+          <small>Estimated balance</small>
+          <strong id="out">$0</strong>
+          <small>Example only, at a 4.00% annual rate compounded monthly. Rates are not guaranteed.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="accounts">
+    <div class="wrap">
+      <h2>Pick the account that fits how you use money</h2>
+      <div class="grid">
+        <div>
+          <h3>Everyday Checking</h3>
+          <p>Debit card, mobile deposits and free transfers. No monthly fee and no minimum balance.</p>
+        </div>
+        <div>
+          <h3>High-Yield Savings</h3>
+          <p>Earn interest on every dollar, withdraw whenever you need to, and set goals with automatic transfers.</p>
+        </div>
+        <div>
+          <h3>Business Checking</h3>
+          <p>Separate your business money, invoice customers and export statements for your accountant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block security" id="security">
+    <div class="wrap">
+      <h2>How we protect your money</h2>
+      <p>Your accounts are protected by layered controls, and you can see and change them any time in settings.</p>
+      <ul>
+        <li>Encryption on all data, in transit and at rest</li>
+        <li>Two-step sign-in with an authenticator app or text code</li>
+        <li>Instant alerts for large or unusual transactions</li>
+        <li>Lock and unlock your card from the app</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block cta" id="open">
+    <div class="wrap">
+      <h2>Open an account today</h2>
+      <p>You need a government ID, your address and your Social Security or tax ID number.</p>
+      <a class="btn" href="#">Start application</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="y"></span> Harbor Bank. Sample site for demonstration.</span>
+    <span>Customer service: 1-800-555-0100</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var money=function(n){return n.toLocaleString("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0})};
+  function calc(){
+    var p=+$("amt").value,m=+$("mo").value,y=+$("yr").value,r=0.04/12,n=y*12;
+    var bal=p*Math.pow(1+r,n)+m*((Math.pow(1+r,n)-1)/r);
+    $("amtv").textContent=money(p);$("mov").textContent=money(m);$("yrv").textContent=y+(y===1?" year":" years");
+    $("out").textContent=money(Math.round(bal));
+  }
+  ["amt","mo","yr"].forEach(function(i){$(i).addEventListener("input",calc)});
+  calc();
+  $("y").textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
